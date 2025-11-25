@@ -1845,13 +1845,22 @@ Furthermore, this website is NOT endorsed by Google in any way.<br></div>
 
 
 	<script>
-		window.page_events = [{ "type": "page_view", "data": {}, "next": [] }];
+		// Countdown timer - sem tracking
+		document.addEventListener('DOMContentLoaded', function() {
+			document.querySelectorAll('[data-seconds]').forEach(function(el) {
+				var totalSeconds = parseInt(el.getAttribute('data-seconds'));
+				function updateTimer() {
+					if (totalSeconds <= 0) return;
+					var minutes = Math.floor(totalSeconds / 60);
+					var seconds = totalSeconds % 60;
+					el.textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+					totalSeconds--;
+					setTimeout(updateTimer, 1000);
+				}
+				updateTimer();
+			});
+		});
 	</script>
-
-
-
-
-	<script type="module" src="js/main.js" crossorigin="anonymous"></script>
 
 
 
